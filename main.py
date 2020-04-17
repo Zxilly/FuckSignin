@@ -4,7 +4,8 @@ cookies = {
     "loginName": "",
     "loginType": "0",
     "yzxx": ""
-}
+}  # name学号，密码疑似统一111111
+
 signdata = {
     "province": "江西省",
     "city": "南昌市",
@@ -29,7 +30,7 @@ signdata = {
     "lng": "28.764745",
     "lat": "115.83801",
     "sfby": "1",
-}
+}  # 随便填，估计提交上去也没人看
 
 formdata = {
     "dcwj": '{"name":"%E5%91%A8%E6%98%95%E9%9B%A8","xb":"0","gtjzrysfyyshqzbl":"N","xzzdsfyyqfbqy":"N",'
@@ -38,14 +39,14 @@ formdata = {
             '","nj":"2019","bj":"","age":"18","lxdh":"17572693170","jjdh":"","sfz":"",'
             '"szd":"1","address":"","hbc":"K232","hjtgj":"0",'
             '"sffx":"1","jkzk":"0"}'
-}
+}  # 随便填，估计提交上去也没人看
 
 
 def get_auth():
     main_session = requests.session()
     main_session.get(
         "https://fxgl.jx.edu.cn/4136010419/third/alipayLogin?cardId="
-        "&sfzMd5=") # 请自行抓包补上
+        "&sfzMd5=")  # 请自行抓包补上支付宝cardid，后面那个诡异变量不会变的，我猜是身份证MD5
     return main_session
 
 
