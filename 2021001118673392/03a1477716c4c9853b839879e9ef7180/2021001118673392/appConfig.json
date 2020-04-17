@@ -1,0 +1,47 @@
+{
+  "window": {
+    "defaultTitle": "My App",
+    "allowsBounceVertical": "NO"
+  },
+  "pages": [
+    "pages/home/index",
+    "pages/index0/index",
+    "pages/h5/index",
+    "pages/index/index",
+    "pages/punch/index",
+    "pages/info/index",
+    "pages/list/index"
+  ],
+  "launchParams": {
+    "pages/home/index": {
+      "defaultTitle": "校园防疫",
+      "allowsBounceVertical": "NO"
+    },
+    "pages/index0/index": {
+      "defaultTitle": "校园防疫看板",
+      "allowsBounceVertical": "NO",
+      "component": true
+    },
+    "pages/h5/index": {
+      "defaultTitle": "学生签到首页",
+      "allowsBounceVertical": "NO"
+    },
+    "pages/index/index": {
+      "defaultTitle": "健康打卡",
+      "allowsBounceVertical": "NO"
+    },
+    "pages/punch/index": {
+      "defaultTitle": "打卡填报",
+      "allowsBounceVertical": "NO"
+    },
+    "pages/info/index": {
+      "defaultTitle": "完善信息",
+      "allowsBounceVertical": "NO"
+    },
+    "pages/list/index": {
+      "defaultTitle": "数据看板",
+      "allowsBounceVertical": "NO"
+    }
+  },
+  "prerenderPage": "index.html"
+}
