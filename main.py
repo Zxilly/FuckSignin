@@ -1,3 +1,6 @@
+import json
+import os
+
 import requests
 
 cookies = {
@@ -7,16 +10,16 @@ cookies = {
 }  # name学号，密码疑似统一111111
 
 signdata = {
-    "province": "江西省",
-    "city": "南昌市",
+    "province": "",
+    "city": "",
     "district": "",
     "street": "",
-    "xszt": "0",
-    "jkzk": "0",
+    "xszt": "",
+    "jkzk": "",
     "jkzkxq": "",
-    "sfgl": "1",
+    "sfgl": "",
     "gldd": "",
-    "mqtw": "0",
+    "mqtw": "",
     "mqtwxq": "",
     "zddlwz": "",
     "sddlwz": "",
@@ -27,26 +30,20 @@ signdata = {
     "sprovince": "",
     "scity": "",
     "sdistrict": "",
-    "lng": "28.764745",
-    "lat": "115.83801",
-    "sfby": "1",
+    "lng": "",
+    "lat": "",
+    "sfby": "",
 }  # 随便填，估计提交上去也没人看
 
 formdata = {
-    "dcwj": '{"name":"%E5%91%A8%E6%98%95%E9%9B%A8","xb":"0","gtjzrysfyyshqzbl":"N","xzzdsfyyqfbqy":"N",'
-            '"jqsfqwzdyq":"N","sfzyblbbdsq":"N","sfyhqzbljcs":"N","sfszsqjfjcxqz":"N","jrtw":"37","xcwz":"3",'
-            '"sf":"0","stype":"0","xy":"'
-            '","nj":"2019","bj":"","age":"18","lxdh":"17572693170","jjdh":"","sfz":"",'
-            '"szd":"1","address":"","hbc":"K232","hjtgj":"0",'
-            '"sffx":"1","jkzk":"0"}'
+    "dcwj": ''
 }  # 随便填，估计提交上去也没人看
 
 
-def get_auth():
+def get_auth(
+        url="https://fxgl.jx.edu.cn/4136010419/third/alipayLogin?cardId=&sfzMd5="):  # 请自行抓包补上支付宝cardid，后面那个诡异变量不会变的，我猜是身份证MD5
     main_session = requests.session()
-    main_session.get(
-        "https://fxgl.jx.edu.cn/4136010419/third/alipayLogin?cardId="
-        "&sfzMd5=")  # 请自行抓包补上支付宝cardid，后面那个诡异变量不会变的，我猜是身份证MD5
+    main_session.get(url)
     return main_session
 
 
@@ -62,6 +59,16 @@ def form(session):
 
 
 if __name__ == '__main__':
-    session = get_auth()
-    sign(session)
-    form(session)
+    if not os.getenv('CI'):
+        session = get_auth()
+        sign(session)
+        form(session)
+    else:
+        url = os.getenv('URL')
+        cookies = json.loads(os.getenv('COOKIES'))
+        signdata = json.loads(os.getenv('SIGNDATA'))
+        formdata = json.loads(os.getenv('FORMDATA'))
+
+        session = get_auth(url)
+        sign(session)
+        form(session)
