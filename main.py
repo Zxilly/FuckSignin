@@ -63,9 +63,7 @@ if __name__ == '__main__':
         url = os.getenv('URL')
         cookies = json.loads(os.getenv('COOKIES'))
         signdata = json.loads(os.getenv('SIGNDATA'))
-        formdata = {
-            "dcwj": os.getenv('FORMDATA')
-        }
+        formdata = {"dcwj": os.getenv('FORMDATA')}
 
         session = get_auth(url)
         sign(session)
