@@ -11,10 +11,6 @@ gen
 ### Example user template
 
 # IntelliJ project files
-.idea
-*.iml
-out
-gen
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -158,3 +154,5 @@ cython_debug/
 
 cert.jks
 use.py
+
+chromedriver.exe

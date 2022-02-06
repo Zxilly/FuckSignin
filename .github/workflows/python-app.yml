@@ -25,20 +25,23 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     
     - name: Run
-      run: python main.py
+      run: python alipay.py
       env:
         URL: ${{secrets.URL}}
         COOKIES: ${{secrets.COOKIES}}
         SIGNDATA: ${{secrets.SIGNDATA}}
         FORMDATA: ${{secrets.FORMDATA}}
+
+    - name: Run Another
+      run: python wechat.py
+      env:
+        USERNAME: ${{secrets.USERNAME}}
+        PASSWORD: ${{secrets.PASSWORD}}
+        WECHAT_DATA: ${{secrets.WECHAT_DATA}}
+
     - name: Send Notification
-  # You may pin to the exact commit or the version.
-  # uses: Zxilly/action-notify@f998cf5ea223975e4de9ceef7e6f980ec9da6844
       uses: Zxilly/action-notify@v0.0.2
       with:
-    # The user will be notified.
         user_id: zxilly
-    # Notification content.
         content: 每日打卡完成
-    # Notification title.
-        title: 支付宝打卡
+        title: 疫情打卡
