@@ -61,6 +61,7 @@ if __name__ == '__main__':
     data = json.loads(os.getenv('WECHAT_DATA'))
 
     now = datetime.now()
+    print(now)
     data['TXRQ'] = now.strftime('%Y-%m-%d')
     data['CZRQ'] = now.strftime('%b %d, %Y %H:%M:%S %p')
 
