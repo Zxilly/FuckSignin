@@ -7,10 +7,11 @@ on:
 
 jobs:
   sign:
-
     runs-on: ubuntu-latest
-
     steps:
+    - name: Set time zone
+      run: sudo timedatectl set-timezone 'Asia/Shanghai'
+    
     - name: Checkout
       uses: actions/checkout@v2
 
@@ -40,7 +41,7 @@ jobs:
         WECHAT_DATA: ${{secrets.WECHAT_DATA}}
 
     - name: Send Notification
-      uses: Zxilly/action-notify@v0.0.3
+      uses: Zxilly/action-notify@v0.0.4
       with:
         user_id: zxilly
         content: 每日打卡完成
