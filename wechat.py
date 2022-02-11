@@ -43,7 +43,8 @@ if __name__ == '__main__':
     time.sleep(2)
 
     driver.get('https://ehall.jgsu.edu.cn/appShow?appId=6414451678401763')
-
+    time.sleep(2)
+    driver.get('https://ehall.jgsu.edu.cn/xsfw/sys/swmlsfxyqtbjgsu/*default/index.do#/jkmsq')
     time.sleep(2)
 
     cookies = driver.get_cookies()
@@ -57,11 +58,25 @@ if __name__ == '__main__':
     }
 
     save_url = "https://ehall.jgsu.edu.cn/xsfw/sys/swmlsfxyqtbjgsu/modules/xssq/savaStuMrqk.do"
+    wid_url = "https://ehall.jgsu.edu.cn/xsfw/sys/swmlsfxyqtbjgsu/modules/xssq/getMrtbxx.do"
 
     data = json.loads(os.getenv('WECHAT_DATA'))
 
     now = datetime.now()
     print(now)
+
+    # GET WID
+    resp = s.post(wid_url, data="data=%7B%7D",
+                  headers={"Referer": "https://ehall.jgsu.edu.cn/xsfw/sys/swmlsfxyqtbjgsu/*default/index.do",
+                           'Accept': 'application/json, text/plain, */*',
+                           'Content-Type': 'application/x-www-form-urlencoded'}).json()
+    wid = ''
+    for d in resp['data']:
+        if d['RQ'] == now.strftime('%Y-%m-%d'):
+            wid = d['WID']
+            break
+
+    data['WID'] = wid
     data['TXRQ'] = now.strftime('%Y-%m-%d')
     data['CZRQ'] = now.strftime('%b %d, %Y %H:%M:%S %p')
 
