@@ -65,16 +65,7 @@ if __name__ == '__main__':
     now = datetime.now()
     print(now)
 
-    # GET WID
-    resp = s.post(wid_url, data="data=%7B%7D",
-                  headers={"Referer": "https://ehall.jgsu.edu.cn/xsfw/sys/swmlsfxyqtbjgsu/*default/index.do",
-                           'Accept': 'application/json, text/plain, */*',
-                           'Content-Type': 'application/x-www-form-urlencoded'}).json()
     wid = ''
-    for d in resp['data']:
-        if d['RQ'] == now.strftime('%Y-%m-%d'):
-            wid = d['WID']
-            break
 
     data['WID'] = wid
     data['TXRQ'] = now.strftime('%Y-%m-%d')
