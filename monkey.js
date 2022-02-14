@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         JGSU 补签到
-// @version      0.0.1
+// @version      0.0.2
 // @description  井冈山大学疫情签到补签到
 // @namespace    Zxneric
 // @author       Zxneric
@@ -50,6 +50,7 @@
             "SFYSQZQKSM": ""
         }
 
+        console.info('开始签到')
         fetch("https://ehall.jgsu.edu.cn/xsfw/sys/swmlsfxyqtbjgsu/modules/xssq/getMrtbxx.do", {
             "headers": {
                 "accept": "application/json, text/plain, */*",
@@ -93,7 +94,21 @@
                     }
                 }
             }
+            const now = new Date()
+            days_need_submit.filter((item) => {
+                const today = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
+                return today !== item;
+            })
+
+            if (days_need_submit.length === 0) {
+                console.warn('没有需要签到的日期')
+                return
+            }
+
+            console.info(`需要补签的日期：${days_need_submit}`)
+
             for (const day of days_need_submit) {
+                console.info(`${day} 补签中`)
                 sub_data['TXRQ'] = day
                 fetch("https://ehall.jgsu.edu.cn/xsfw/sys/swmlsfxyqtbjgsu/modules/xssq/savaStuMrqk.do", {
                     "headers": {
@@ -115,6 +130,10 @@
                     "method": "POST",
                     "mode": "cors",
                     "credentials": "include"
+                }).then((resp) => {
+                    return resp.text()
+                }).then((text) => {
+                    console.log(`${day} 补签成功: ${text}`)
                 });
             }
         })
