@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         JGSU 补签到
-// @version      0.0.2
+// @version      0.0.3
 // @description  井冈山大学疫情签到补签到
 // @namespace    Zxneric
 // @author       Zxneric
@@ -94,9 +94,9 @@
                     }
                 }
             }
-            const now = new Date()
+            const now = new Date();
+            const today = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`
             days_need_submit.filter((item) => {
-                const today = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
                 return today !== item;
             })
 
